@@ -32,7 +32,7 @@ cp ./taret/x86_64-unknown-uefi/release/rustos-boot-uefi.efi ./boot/EFI/boot/Boot
 qemu-system-x86_64 -bios /usr/share/ovmf/x64/OVMF.4m.fd -drive format=raw,file=fat:rw:./boot/
 ```
 
-### загрузка с флешки
+### загрузка с заранее подготовленной флешки
 
 ```
 sudo qemu-system-x86_64 -bios /usr/share/ovmf/x64/OVMF.4m.fd -m 512 -hda /dev/sdX
