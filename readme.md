@@ -11,6 +11,33 @@ cargo +nightly build
 cargo build
 ```
 
+## В дополнение к авторскому варианту
+
+### компиляция
+
+```
+cargo +nightly build --release
+```
+
+### подготовить окружение
+
+```
+mkdir -p ./boot/EFI/boot
+cp ./taret/x86_64-unknown-uefi/release/rustos-boot-uefi.efi ./boot/EFI/boot/Bootx64.efi
+```
+
+### запуск с директории ./boot (предварительно скопировать исполняемый файл из target в ./boot/EFI/boot/Bootx64.efi
+
+```
+qemu-system-x86_64 -bios /usr/share/ovmf/x64/OVMF.4m.fd -drive format=raw,file=fat:rw:./boot/
+```
+
+### загрузка с флешки
+
+```
+sudo qemu-system-x86_64 -bios /usr/share/ovmf/x64/OVMF.4m.fd -m 512 -hda /dev/sdX
+```
+
 ## testing
 
 - create a directory named `/EFI/boot` and rename boot file as `Bootx64.efi`

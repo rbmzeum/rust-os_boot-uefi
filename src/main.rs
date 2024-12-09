@@ -7,6 +7,11 @@ mod uefi;
 use uefi::*;
 #[no_mangle]
 pub extern "efiapi" fn efi_main(_handle: ImageHandle, system_table: *const SystemTable) {
+    unsafe {
+        ((*(*system_table).output).clear_screen)((*system_table).output);
+        ((*(*system_table).output).set_attribute)((*system_table).output, 0x0E); // 0 - чёрный фон, E - жёлтый текст
+    }
+
     let msg = "Hello\n\r";
     for character in msg.chars() {
         let mut buffer: [u16; 1] = [0];
